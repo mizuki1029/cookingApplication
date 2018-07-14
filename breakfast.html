@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    
+ 
+        <title>プチデジュモ</title>
+ 
+        <!-- tmlib.js -->
+        <script src="http://cdn.rawgit.com/phi-jp/phina.js/v0.1.1/build/phina.js"></script><script src='phina.js'></script>
+ 
+        <!-- game -->
+        <script>
+phina.globalize();
+function display(){
+    //answer.remove();
+    var imageSecond = Sprite('step1_1').addChildTo(this);
+    imageSecond.x = SCREEN_WIDTH/2;
+    imageSecond.y = SCREEN_HEIGHT/2;
+    //this.exit();
+}
+/**
+ * ゲーム用定数作成
+ */
+var SCREEN_WIDTH  = 1600;
+var SCREEN_HEIGHT = 900;
+var next=0;
+var pdfmovie=0;
+var ASSETS = {
+  image: {
+	  'title1': 'scene/title1.png',
+	  'title2': 'scene/title2.png',
+      'menu': 'scene/main.png',
+      'mode': 'scene/mode.png',
+      'replay': 'scene/replay.png',
+      'share': 'scene/share.png',
+      'point1': 'point/point1.png',
+      'point2': 'point/point2.png',
+      'point3': 'point/point3.png',
+      'point4': 'point/point4.png',
+      'quiz1': 'quiz/quiz1.png',
+      'quiz2': 'quiz/quiz2.png',
+      'quiz3': 'quiz/quiz3.png',
+      'quiz4': 'quiz/quiz4.png',
+      'correct1': 'answer/correct1.png',
+      'correct2': 'answer/correct2.png',
+      'correct3': 'answer/correct3.png',
+      'correct4': 'answer/correct4.png',
+      'incorrect1': 'answer/incorrect1.png',
+      'incorrect2': 'answer/incorrect2.png',
+      'incorrect3': 'answer/incorrect3.png',
+      'incorrect4': 'answer/incorrect4.png',
+      'step1_1': 'steps/step1_1.png',
+      'step1_2': 'steps/step1_2.png',
+      'step1_3': 'steps/step1_3.png',
+      'step1_4': 'steps/step1_4.png',
+      'step1_5': 'steps/step1_5.png',
+      'step1_6': 'steps/step1_6.png',
+      'step2_1': 'steps/step2_1.png',
+      'step2_2': 'steps/step2_2.png',
+      'step2_3': 'steps/step2_3.png',
+      'step2_4': 'steps/step2_4.png',
+      'step3_1': 'steps/step3_1.png',
+      'step3_2': 'steps/step3_2.png',
+      'step3_3': 'steps/step3_3.png',
+      'step3_4': 'steps/step3_4.png',
+      'step3_5': 'steps/step3_5.png',
+      'step3_6': 'steps/step3_6.png',
+      'step3_7': 'steps/step3_7.png',
+      'step3_8': 'steps/step3_8.png',
+      'step3_9': 'steps/step3_9.png',
+      'step3_10': 'steps/step3_10.png',
+      'step4_1': 'steps/step4_1.png',
+      'step4_2': 'steps/step4_2.png',
+      'step4_3': 'steps/step4_3.png',
+      'step4_4': 'steps/step4_4.png',
+      'step4_5': 'steps/step4_5.png',
+      'step4_6': 'steps/step4_6.png',
+      
+  },
+};
+
+phina.define('SplashScene', {
+  superClass: 'CanvasScene',
+  
+  init: function() {
+	  this.superInit({
+	      width: SCREEN_WIDTH,
+	      height: SCREEN_HEIGHT,
+	  });
+    
+    var title1 = Sprite('title1').addChildTo(this);
+    title1.x = SCREEN_WIDTH/2;
+    title1.y = SCREEN_HEIGHT/2;
+    var time = 0;
+    // 更新処理
+    this.update = function(app) {
+        time += app.deltaTime;
+        if( Math.floor(time / 1000)>1){
+             title1.remove();
+             var title2 = Sprite('title2').addChildTo(this);
+             title2.x = SCREEN_WIDTH/2;
+             title2.y = SCREEN_HEIGHT/2;
+             if( Math.floor(time / 1000)>3){
+                title2.remove();
+                var main = Sprite('menu').addChildTo(this);
+                main.x = SCREEN_WIDTH/2;
+                main.y = SCREEN_HEIGHT/2;
+                //this.display();
+             }
+        }
+    };
+             
+    this.onpointstart = function(e) {
+       
+        if(e.pointer.x>420 && e.pointer.x<745 && e.pointer.y>96 && e.pointer.y<420){
+             next = 1;
+        }else if(e.pointer.x>960 && e.pointer.x<1255 && e.pointer.y>96 && e.pointer.y<420){
+             next = 2;
+        }else if(e.pointer.x>420 && e.pointer.x<745 && e.pointer.y>470 && e.pointer.y<800){
+             next = 3;
+        }else if(e.pointer.x>960 && e.pointer.x<1255 && e.pointer.y>470 && e.pointer.y<880){
+             next = 4;
+        }
+        if(next>0){
+             this.exit();
+        }
+    };
+  },
+});
+
+
+phina.define('TitleScene', {
+   superClass: 'CanvasScene',
+   init: function() {
+      this.superInit({
+          width: SCREEN_WIDTH,
+          height: SCREEN_HEIGHT,
+       });
+        var mode = Sprite('mode').addChildTo(this);
+        mode.x = SCREEN_WIDTH/2;
+        mode.y = SCREEN_HEIGHT/2;
+             
+        this.onpointstart = function(e) {
+             if(e.pointer.x<800){
+                pdfmovie=2;
+             }else{
+                pdfmovie=1;
+             }
+             if(pdfmovie>0){
+                this.exit();
+             }
+        };
+    },
+});
+phina.define('MainScene', {
+    superClass: 'CanvasScene',
+
+    init: function() {
+        this.superInit({
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+            backgroundColor: '#D0A9F5',
+        });
+        if(pdfmovie === 1){//recipe mode
+             var time = 0;
+             var flag = 0;
+             this.update = function(app) {
+                time += app.deltaTime;
+                var share = Sprite('share').addChildTo(this);
+                share.x = SCREEN_WIDTH/2;
+                share.y = SCREEN_HEIGHT/2;
+                if( Math.floor(time / 1000)>2 && flag===0){
+                    share.remove();
+                    if(next===1){document.write('<img src="recipe/recipe1.png" />');}
+                    else if(next===2){document.write('<img src="recipe/recipe2.png" />');}
+                    else if(next===3){document.write('<img src="recipe/recipe3.png" />');}
+                    else{document.write('<img src="recipe/recipe4.png" />');}
+                    flag=1;
+                }
+             }
+             
+	}
+	/*
+	else{//lesson mode
+             var time = 0;
+             var Qflag=1;
+             var Mflag=0;
+             var endmovie=0;
+             var pointtime=0;
+             if(next===1){endmovie=6; pointtime=3;}
+             else if(next===2){endmovie=4; pointtime=2;}
+             else if(next===3){endmovie=10; pointtime=2;}
+             else{endmovie=6; pointtime=3;}
+             if(Qflag===1){
+                var quiz = Sprite('quiz'+next).addChildTo(this);
+                quiz.x = SCREEN_WIDTH/2;
+                quiz.y = SCREEN_HEIGHT/2;
+                Qflag=2;
+             }
+             //Quiz
+             
+             this.onpointstart = function(e) {
+                if(Mflag===0 && Qflag===2){
+                    quiz.remove();
+                    var correct = Sprite('correct'+next).addChildTo(this);
+                    var incorrect = Sprite('incorrect'+next).addChildTo(this);
+                    if(e.pointer.x>700 && e.pointer.x<900){
+                        if(next===1||next===2){//correct
+                            var answer = Sprite('correct'+next).addChildTo(this);
+                        }else{
+                            var answer = Sprite('incorrect'+next).addChildTo(this);
+                        }
+                        //var incorrect1 = Sprite('incorrect1').addChildTo(this);
+                        answer.x = SCREEN_WIDTH/2;
+                        answer.y = SCREEN_HEIGHT/2;
+                        Qflag=0;
+                        //Mflag=1;
+                    }else if(e.pointer.x>1150 && e.pointer.x<1370){
+                        if(next===3||next===4){//correct
+                            var answer = Sprite('correct'+next).addChildTo(this);
+                        }else{
+                            var answer = Sprite('incorrect'+next).addChildTo(this);
+                        }
+                        //var incorrect1 = Sprite('incorrect1').addChildTo(this);
+                        answer.x = SCREEN_WIDTH/2;
+                        answer.y = SCREEN_HEIGHT/2;
+                        Qflag=0;
+                        //Mflag=1;
+                    }
+                }
+             }
+             if(Mflag===1){
+                for(var j=1; j<=endmovie; j++){
+                    var imageSecond = Sprite('step'+next+'_'+j').addChildTo(this);
+                    imageSecond.x = SCREEN_WIDTH/2;
+                    imageSecond.y = SCREEN_HEIGHT/2;
+                    time = 0;
+                                     
+                    if(j===pointTime){
+                            var point = Sprite('point'+next).addChildTo(this);
+                            point.x = SCREEN_WIDTH/2;
+                            point.y = SCREEN_HEIGHT/2;
+                            time = 0;
+                            //if(Qflag===0){
+                               this.update = function(app) {
+                                  time += app.deltaTime;
+                                  if(Math.floor(time / 1000)>2){
+                                      this.exit();
+                                  }
+                                }
+                            }
+                    }
+                    if(j>endmovie){
+                     this.exit();
+                    }
+                }
+            }
+        }*/
+    },
+});
+phina.define('ResultScene', {
+    superClass: 'CanvasScene',
+    init: function() {
+        this.superInit({
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+        });
+        var replay = Sprite('replay').addChildTo(this);
+        replay.x = SCREEN_WIDTH/2;
+        replay.y = SCREEN_HEIGHT/2;
+        this.onpointstart = function(e) {
+             if(e.pointer.x<800){
+                this.exit();
+             }else{
+                var time = 0;
+                var flag = 0;
+                this.update = function(app) {
+                    time += app.deltaTime;
+                    var share2 = Sprite('share').addChildTo(this);
+                    share2.x = SCREEN_WIDTH/2;
+                    share2.y = SCREEN_HEIGHT/2;
+                if( Math.floor(time / 1000)>2 && flag===0){
+                    if(next===1){document.write('<img src="recipe1.png" />');}
+                    else if(next===2){document.write('<img src="recipe2.png" />');}
+                    else if(next===3){document.write('<img src="recipe3.png" />');}
+                    else{document.write('<img src="recipe4.png" />');}
+                    flag=1;
+                }
+             }
+        }
+      }
+  },
+});
+phina.main(function() {
+    var app = GameApp({
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    backgroundColor: '#000000',
+    startLabel: 'splash',
+    assets: ASSETS,
+
+  });
+  app.run();
+});
+
+
+	</script>
+    </head>
+    <body>
+        <a href="mailto:buq1079@mail4.doshisha.ac.jp?subject=プチデジュモレビュー&body=【年齢】%0D%0A %0D%0A【性別】%0D%0A %0D%0A【学習時間はどうでしたか】%0D%0A %0D%0A【難易度はどうでしたか】%0D%0A %0D%0A【レシピはどうでしたか】%0D%0A %0D%0A【学習した料理名】%0D%0A %0D%0A【感想】%0D%0A">レビューを送信する</a>
+    </body>
+    
+</html>

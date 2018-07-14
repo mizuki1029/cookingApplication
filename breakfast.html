@@ -15,13 +15,6 @@
         <!-- game -->
         <script>
 phina.globalize();
-function display(){
-    //answer.remove();
-    var imageSecond = Sprite('step1_1').addChildTo(this);
-    imageSecond.x = SCREEN_WIDTH/2;
-    imageSecond.y = SCREEN_HEIGHT/2;
-    //this.exit();
-}
 /**
  * ゲーム用定数作成
  */
@@ -82,7 +75,7 @@ var ASSETS = {
       
   },
 };
-
+//title scene
 phina.define('SplashScene', {
   superClass: 'CanvasScene',
   
@@ -96,7 +89,7 @@ phina.define('SplashScene', {
     title1.x = SCREEN_WIDTH/2;
     title1.y = SCREEN_HEIGHT/2;
     var time = 0;
-    // 更新処理
+    //wait some seconds
     this.update = function(app) {
         time += app.deltaTime;
         if( Math.floor(time / 1000)>1){
@@ -109,11 +102,10 @@ phina.define('SplashScene', {
                 var main = Sprite('menu').addChildTo(this);
                 main.x = SCREEN_WIDTH/2;
                 main.y = SCREEN_HEIGHT/2;
-                //this.display();
              }
         }
     };
-             
+    //select menu
     this.onpointstart = function(e) {
        
         if(e.pointer.x>420 && e.pointer.x<745 && e.pointer.y>96 && e.pointer.y<420){
@@ -132,7 +124,7 @@ phina.define('SplashScene', {
   },
 });
 
-
+//select lesson or recipe mode
 phina.define('TitleScene', {
    superClass: 'CanvasScene',
    init: function() {
@@ -156,6 +148,7 @@ phina.define('TitleScene', {
         };
     },
 });
+//main scene
 phina.define('MainScene', {
     superClass: 'CanvasScene',
 
@@ -184,7 +177,7 @@ phina.define('MainScene', {
              }
              
 	}
-	/*
+	
 	else{//lesson mode
              var time = 0;
              var Qflag=1;
@@ -232,7 +225,7 @@ phina.define('MainScene', {
                         //Mflag=1;
                     }
                 }
-             }
+             }/*
              if(Mflag===1){
                 for(var j=1; j<=endmovie; j++){
                     var imageSecond = Sprite('step'+next+'_'+j').addChildTo(this);
@@ -258,10 +251,11 @@ phina.define('MainScene', {
                      this.exit();
                     }
                 }
-            }
-        }*/
+            }*/
+        }
     },
 });
+//select replay or download recipe
 phina.define('ResultScene', {
     superClass: 'CanvasScene',
     init: function() {

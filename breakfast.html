@@ -220,6 +220,7 @@ phina.define('MainScene', {
                     var j=1;
                     var images;
                     var time = 0;
+                    var Pflag = 0;
                     this.update =  function(app) {
                     	time += app.deltaTime;
                     	if(j===1 && Math.floor(time / 1000)>2){
@@ -229,6 +230,12 @@ phina.define('MainScene', {
                	 			images.y = SCREEN_HEIGHT/2;
                	 			time = 0;
                	 			j++;
+               	 		}else if(j === pointtime && Pflag===0 && Math.floor(time / 1000)>2){
+               	 			images = Sprite('point'+next).addChildTo(this);
+               	 			images.x = SCREEN_WIDTH/2; 
+               	 			images.y = SCREEN_HEIGHT/2;
+               	 			time = 0;
+               	 			Pflag=1;
                	 		}else if(j === (endmovie+1) && Math.floor(time / 1000)>2){
                	 			this.exit();
                	 		}else if(j > 1 && Math.floor(time / 1000)>2){//update sprite

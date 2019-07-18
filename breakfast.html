@@ -1,17 +1,17 @@
 <!DOCTYPE html>
- 
+
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-    
- 
+
+
         <title>プチデジュモ</title>
- 
+
         <!-- phina.js -->
         <script src="http://cdn.rawgit.com/phi-jp/phina.js/v0.1.1/build/phina.js"></script><script src='phina.js'></script
- 
+
         <!-- game -->
         <script>
 phina.globalize();
@@ -24,67 +24,67 @@ var next=0;
 var pdfmovie=0;
 var ASSETS = {
   image: {
-	  'title1': 'scene/title1.png',
-	  'title2': 'scene/title2.png',
-      'menu': 'scene/main.png',
-      'mode': 'scene/mode.png',
-      'replay': 'scene/replay.png',
-      'share': 'scene/share.png',
-      'point1': 'point/point1.png',
-      'point2': 'point/point2.png',
-      'point3': 'point/point3.png',
-      'point4': 'point/point4.png',
-      'quiz1': 'quiz/quiz1.png',
-      'quiz2': 'quiz/quiz2.png',
-      'quiz3': 'quiz/quiz3.png',
-      'quiz4': 'quiz/quiz4.png',
-      'correct1': 'answer/correct1.png',
-      'correct2': 'answer/correct2.png',
-      'correct3': 'answer/correct3.png',
-      'correct4': 'answer/correct4.png',
-      'incorrect1': 'answer/incorrect1.png',
-      'incorrect2': 'answer/incorrect2.png',
-      'incorrect3': 'answer/incorrect3.png',
-      'incorrect4': 'answer/incorrect4.png',
-      'step1_1': 'steps/step1_1.png',
-      'step1_2': 'steps/step1_2.png',
-      'step1_3': 'steps/step1_3.png',
-      'step1_4': 'steps/step1_4.png',
-      'step1_5': 'steps/step1_5.png',
-      'step1_6': 'steps/step1_6.png',
-      'step2_1': 'steps/step2_1.png',
-      'step2_2': 'steps/step2_2.png',
-      'step2_3': 'steps/step2_3.png',
-      'step2_4': 'steps/step2_4.png',
-      'step3_1': 'steps/step3_1.png',
-      'step3_2': 'steps/step3_2.png',
-      'step3_3': 'steps/step3_3.png',
-      'step3_4': 'steps/step3_4.png',
-      'step3_5': 'steps/step3_5.png',
-      'step3_6': 'steps/step3_6.png',
-      'step3_7': 'steps/step3_7.png',
-      'step3_8': 'steps/step3_8.png',
-      'step3_9': 'steps/step3_9.png',
-      'step3_10': 'steps/step3_10.png',
-      'step4_1': 'steps/step4_1.png',
-      'step4_2': 'steps/step4_2.png',
-      'step4_3': 'steps/step4_3.png',
-      'step4_4': 'steps/step4_4.png',
-      'step4_5': 'steps/step4_5.png',
-      'step4_6': 'steps/step4_6.png',
-      
+	    'title1': 'scene/title1.jpg',
+	    'title2': 'scene/title2.jpg',
+      'menu': 'scene/main.jpg',
+      'mode': 'scene/mode.jpg',
+      'replay': 'scene/replay.jpg',
+      'share': 'scene/share.jpg',
+      'point1': 'point/point1.jpg',
+      'point2': 'point/point2.jpg',
+      'point3': 'point/point3.jpg',
+      'point4': 'point/point4.jpg',
+      'quiz1': 'quiz/quiz1.jpg',
+      'quiz2': 'quiz/quiz2.jpg',
+      'quiz3': 'quiz/quiz3.jpg',
+      'quiz4': 'quiz/quiz4.jpg',
+      'correct1': 'answer/correct1.jpg',
+      'correct2': 'answer/correct2.jpg',
+      'correct3': 'answer/correct3.jpg',
+      'correct4': 'answer/correct4.jpg',
+      'incorrect1': 'answer/incorrect1.jpg',
+      'incorrect2': 'answer/incorrect2.jpg',
+      'incorrect3': 'answer/incorrect3.jpg',
+      'incorrect4': 'answer/incorrect4.jpg',
+      'step1_1': 'steps/step1_1.jpg',
+      'step1_2': 'steps/step1_2.jpg',
+      'step1_3': 'steps/step1_3.jpg',
+      'step1_4': 'steps/step1_4.jpg',
+      'step1_5': 'steps/step1_5.jpg',
+      'step1_6': 'steps/step1_6.jpg',
+      'step2_1': 'steps/step2_1.jpg',
+      'step2_2': 'steps/step2_2.jpg',
+      'step2_3': 'steps/step2_3.jpg',
+      'step2_4': 'steps/step2_4.jpg',
+      'step3_1': 'steps/step3_1.jpg',
+      'step3_2': 'steps/step3_2.jpg',
+      'step3_3': 'steps/step3_3.jpg',
+      'step3_4': 'steps/step3_4.jpg',
+      'step3_5': 'steps/step3_5.jpg',
+      'step3_6': 'steps/step3_6.jpg',
+      'step3_7': 'steps/step3_7.jpg',
+      'step3_8': 'steps/step3_8.jpg',
+      'step3_9': 'steps/step3_9.jpg',
+      'step3_10': 'steps/step3_10.jpg',
+      'step4_1': 'steps/step4_1.jpg',
+      'step4_2': 'steps/step4_2.jpg',
+      'step4_3': 'steps/step4_3.jpg',
+      'step4_4': 'steps/step4_4.jpg',
+      'step4_5': 'steps/step4_5.jpg',
+      'step4_6': 'steps/step4_6.jpg',
+
   },
 };
 // title scene
 phina.define('SplashScene', {
   superClass: 'CanvasScene',
-  
+
   init: function() {
 	  this.superInit({
 	      width: SCREEN_WIDTH,
 	      height: SCREEN_HEIGHT,
 	  });
-    
+
     var title1 = Sprite('title1').addChildTo(this);
     title1.x = SCREEN_WIDTH/2;
     title1.y = SCREEN_HEIGHT/2;
@@ -107,7 +107,7 @@ phina.define('SplashScene', {
     };
     // select menu
     this.onpointstart = function(e) {
-       
+
         if(e.pointer.x>423 && e.pointer.x<748 && e.pointer.y>100 && e.pointer.y<422){
              next = 1;
         }else if(e.pointer.x>966 && e.pointer.x<1256 && e.pointer.y>95 && e.pointer.y<412){
@@ -135,7 +135,7 @@ phina.define('TitleScene', {
         var mode = Sprite('mode').addChildTo(this);
         mode.x = SCREEN_WIDTH/2;
         mode.y = SCREEN_HEIGHT/2;
-             
+
         this.onpointstart = function(e) {
              if(e.pointer.x<800){
                 pdfmovie=2;//lesson
@@ -152,7 +152,7 @@ phina.define('TitleScene', {
 // main scene
 phina.define('MainScene', {
     superClass: 'CanvasScene',
-    
+
     init: function() {
         this.superInit({
             width: SCREEN_WIDTH,
@@ -175,13 +175,13 @@ phina.define('MainScene', {
                     else{document.write('<img src="recipe/recipe4.png" />');}
                     flag=1;
                 }
-            }  
+            }
         }
-        
+
         else{// lesson mode
              var Qflag=1;//Quiz Flag
              var endmovie=0;//number of steps
-             var pointtime=0;//when one point is displayed 
+             var pointtime=0;//when one point is displayed
              //set the number of steps etc...
              if(next===1){endmovie=6; pointtime=3;}
              else if(next===2){endmovie=4; pointtime=2;}
@@ -216,7 +216,7 @@ phina.define('MainScene', {
                     Qflag = 0;
                     //clicked again
                     //when a user finished to check the answer of quiz
-                    
+
                     var j=1;
                     var images;
                     var time = 0;
@@ -226,13 +226,13 @@ phina.define('MainScene', {
                     	if(j===1 && Math.floor(time / 1000)>4){
                     		answer.remove();
                	 			images = Sprite('step'+next+'_1').addChildTo(this);
-               	 			images.x = SCREEN_WIDTH/2; 
+               	 			images.x = SCREEN_WIDTH/2;
                	 			images.y = SCREEN_HEIGHT/2;
                	 			time = 0;
                	 			j++;
                	 		}else if(j === pointtime && Pflag===0 && Math.floor(time / 1000)>4){
                	 			images = Sprite('point'+next).addChildTo(this);
-               	 			images.x = SCREEN_WIDTH/2; 
+               	 			images.x = SCREEN_WIDTH/2;
                	 			images.y = SCREEN_HEIGHT/2;
                	 			time = 0;
                	 			Pflag=1;
@@ -241,12 +241,12 @@ phina.define('MainScene', {
                	 		}else if(j > 1 && Math.floor(time / 1000)>4){//update sprite
                	 			images = Sprite('step'+next+'_'+j).addChildTo(this);
                	 			//images.setImage('step'+next+'_'+j);
-               	 			images.x = SCREEN_WIDTH/2; 
+               	 			images.x = SCREEN_WIDTH/2;
                	 			images.y = SCREEN_HEIGHT/2;
-               	 			
+
                	 			time = 0;
                	 			j++;
-               	 		}	
+               	 		}
                     }
                 }//check flag
              };//first click
@@ -305,5 +305,5 @@ phina.main(function() {
     <body>
         <a href="mailto:buq1079@mail4.doshisha.ac.jp?subject=プチデジュモレビュー&body=以下の質問に１（そう思わない）〜5（そう思う）の5段階でお答えください。 %0D%0A %0D%0A・教材はわかりやすかった（　　　） %0D%0A ・料理の内容は難しかった（　　　） %0D%0A ・おしゃれな朝ごはんに魅力を感じた（　　　） %0D%0A ・実践したいと思った（　　　） %0D%0A ・知り合いにこの教材を勧めたいと思う（　　　） %0D%0A %0D%0A 以下の質問にお答えください。 %0D%0A %0D%0A【年齢】%0D%0A %0D%0A 【性別】%0D%0A %0D%0A 【実際に作ってみましたか？（理由も含めてお答えください） %0D%0A %0D%0A %0D%0A 【感想や意見があればご記入してください。】 %0D%0A %0D%0A %0D%0A アンケートは以上です。ご協力ありがとうございました。%0D%0A">レビューを送信する</a>
     </body>
-    
+
 </html>
